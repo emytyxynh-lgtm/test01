@@ -4,64 +4,244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>sir Alếc - Bio Links</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body,html{font-family:'Poppins',sans-serif;overflow-x:hidden;background:#000}
-.container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(180deg,#0a0a1a 0%,#000000 100%);position:relative;overflow:hidden;padding:40px 20px}
-.stars{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
-.star{position:absolute;background:white;border-radius:50%;animation:twinkle linear infinite}
-@keyframes twinkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
-.shooting-star{position:absolute;height:2px;background:linear-gradient(90deg,#fff,transparent);animation:shoot 3s linear infinite}
-@keyframes shoot{0%{transform:translateX(0) translateY(0);opacity:1}100%{transform:translateX(-500px) translateY(300px);opacity:0}}
-.profile-wrapper{position:relative;z-index:10;text-align:center;animation:fadeInUp 0.8s ease;max-width:500px;width:100%}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.avatar-wrapper{margin-bottom:25px;display:inline-block;position:relative}
-.avatar{width:120px;height:120px;border-radius:50%;border:4px solid rgba(255,255,255,0.1);box-shadow:0 0 30px rgba(255,255,255,0.2),0 0 60px rgba(255,255,255,0.1);animation:float 3s ease-in-out infinite;object-fit:cover;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
-@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
-.avatar-glow{position:absolute;top:50%;left:50%;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,0.3),transparent);transform:translate(-50%,-50%);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.5}50%{transform:translate(-50%,-50%) scale(1.2);opacity:0.8}}
-h1{font-size:32px;font-weight:700;color:#fff;margin-bottom:10px;text-shadow:0 0 20px rgba(255,255,255,0.5)}
-.bio{font-size:15px;color:#aaa;margin-bottom:40px;line-height:1.6}
-.links-container{display:flex;flex-direction:column;gap:18px;width:100%}
-.link-item{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:15px;padding:18px 25px;display:flex;align-items:center;gap:15px;text-decoration:none;color:#fff;transition:all 0.3s ease;position:relative;overflow:hidden}
-.link-item::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left 0.5s}
-.link-item:hover::before{left:100%}
-.link-item:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-.link-icon{width:45px;height:45px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-.telegram-icon{background:linear-gradient(135deg,#2AABEE 0%,#229ED9 100%);box-shadow:0 5px 15px rgba(42,171,238,0.4)}
-.facebook-icon{background:linear-gradient(135deg,#1877F2 0%,#0C63D4 100%);box-shadow:0 5px 15px rgba(24,119,242,0.4)}
-.whatsapp-icon{background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);box-shadow:0 5px 15px rgba(37,211,102,0.4)}
-.link-text{flex:1;text-align:left}
-.link-title{font-size:18px;font-weight:600;margin-bottom:3px}
-.link-subtitle{font-size:13px;color:#888}
-.link-arrow{font-size:20px;color:#666;transition:transform 0.3s}
-.link-item:hover .link-arrow{transform:translateX(5px);color:#fff}
-.footer{margin-top:40px;text-align:center;color:#555;font-size:13px}
-.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.95);backdrop-filter:blur(10px);animation:fadeIn 0.3s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-content{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);margin:10% auto;padding:50px 40px;border:1px solid rgba(255,255,255,0.1);border-radius:25px;width:90%;max-width:450px;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,0.8);animation:slideUp 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);position:relative;overflow:hidden}
-.modal-content::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#667eea 0%,#764ba2 100%)}
-@keyframes slideUp{from{transform:translateY(100px) scale(0.8);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-.modal-content h2{color:#fff;margin-bottom:20px;font-size:28px;font-weight:700}
-.icon-wrapper{width:80px;height:80px;margin:0 auto 25px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:modalPulse 2s ease infinite}
-@keyframes modalPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(102,126,234,0.7)}50%{transform:scale(1.05);box-shadow:0 0 0 20px rgba(102,126,234,0)}}
-.icon-wrapper::before{content:'👤';font-size:40px}
-.modal-content p{color:#aaa;margin-bottom:25px;font-size:16px;line-height:1.6}
-.name-input{width:100%;padding:15px 20px;border:2px solid rgba(255,255,255,0.1);border-radius:15px;background:rgba(255,255,255,0.05);color:#fff;font-size:16px;font-family:'Poppins',sans-serif;margin-bottom:25px;transition:all 0.3s;outline:none;-webkit-user-select:text;user-select:text}
-.name-input:focus{border-color:rgba(102,126,234,0.5);background:rgba(255,255,255,0.08);box-shadow:0 0 20px rgba(102,126,234,0.2)}
-.name-input::placeholder{color:#666}
-.error-message{color:#ff4444;font-size:13px;margin-top:-15px;margin-bottom:15px;display:none}
-.btn{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:15px 50px;border:none;border-radius:50px;cursor:pointer;font-size:18px;font-weight:600;transition:all 0.3s;box-shadow:0 10px 30px rgba(102,126,234,0.4);position:relative;overflow:hidden}
-.btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.3);transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}
-.btn:hover::before{width:300px;height:300px}
-.btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(102,126,234,0.6)}
-.btn:disabled{opacity:0.5;cursor:not-allowed}
-.btn span{position:relative;z-index:1}
-@media (max-width:768px){h1{font-size:28px}.link-title{font-size:16px}.profile-wrapper{padding:0 10px}}
+html,body{font-family:'Poppins',sans-serif;background:#000;overflow-x:hidden}
+
+.container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:40px 20px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top,#1b1f3b 0%,transparent 60%),
+    linear-gradient(180deg,#05050f 0%,#000 100%);
+}
+
+/* glow nền */
+.container::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,rgba(102,126,234,0.08),transparent 70%);
+  z-index:0;
+}
+
+/* sao nền */
+.stars{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  opacity:0.8;
+  box-shadow:0 0 6px rgba(255,255,255,0.8);
+  animation:twinkle linear infinite;
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(0)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+/* sao băng */
+.shooting-star{
+  position:absolute;
+  height:2px;
+  background:linear-gradient(90deg,#fff,transparent);
+  z-index:0;
+  pointer-events:none;
+  animation:shoot linear forwards;
+}
+
+@keyframes shoot{
+  from{transform:translate(0,0);opacity:1}
+  to{transform:translate(-600px,400px);opacity:0}
+}
+
+/* profile */
+.profile-wrapper{
+  z-index:2;
+  text-align:center;
+  max-width:500px;
+  width:100%;
+  animation:fadeInUp .8s ease;
+}
+
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* avatar */
+.avatar-wrapper{position:relative;margin-bottom:25px}
+.avatar{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,0.15);
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  box-shadow:0 0 30px rgba(255,255,255,.2);
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.avatar-glow{
+  position:absolute;
+  top:50%;left:50%;
+  width:150px;height:150px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(102,126,234,.4),transparent);
+  animation:pulse 2s infinite;
+  z-index:-1;
+}
+
+@keyframes pulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}
+  50%{transform:translate(-50%,-50%) scale(1.2);opacity:.9}
+}
+
+h1{color:#fff;font-size:32px;font-weight:700}
+.bio{color:#aaa;font-size:15px;margin-bottom:40px}
+
+/* links */
+.links-container{display:flex;flex-direction:column;gap:18px}
+
+.link-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:18px 25px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.1);
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.link-item:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.1);
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+.link-icon{
+  width:45px;height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-size:20px;
+  flex-shrink:0;
+}
+
+.facebook-icon{background:linear-gradient(135deg,#1877F2,#0C63D4);box-shadow:0 5px 15px rgba(24,119,242,.4)}
+.telegram-icon{background:linear-gradient(135deg,#2AABEE,#229ED9);box-shadow:0 5px 15px rgba(42,171,238,.4)}
+.whatsapp-icon{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 5px 15px rgba(37,211,102,.4)}
+.discord-icon{background:linear-gradient(135deg,#5865F2,#404EED);box-shadow:0 5px 15px rgba(88,101,242,.4)}
+
+.link-text{text-align:left;flex:1}
+.link-title{font-size:18px;font-weight:600}
+.link-subtitle{font-size:13px;color:#aaa}
+.link-arrow{font-size:20px;color:#777;transition:.3s}
+.link-item:hover .link-arrow{transform:translateX(6px);color:#fff}
+
+@media(max-width:768px){
+  h1{font-size:28px}
+  .link-title{font-size:16px}
+}
 </style>
 </head>
+
+<body>
+
+<div class="container">
+  <div class="stars"></div>
+
+  <div class="profile-wrapper">
+    <div class="avatar-wrapper">
+      <div class="avatar-glow"></div>
+      <div class="avatar"></div>
+    </div>
+
+    <h1>sir Alếc</h1>
+    <p class="bio">Bio links • Cosmic vibe ✨</p>
+
+    <div class="links-container">
+      <a href="#" class="link-item">
+        <div class="link-icon facebook-icon">f</div>
+        <div class="link-text">
+          <div class="link-title">Facebook</div>
+          <div class="link-subtitle">Follow me</div>
+        </div>
+        <div class="link-arrow">→</div>
+      </a>
+
+      <a href="#" class="link-item">
+        <div class="link-icon discord-icon">🎮</div>
+        <div class="link-text">
+          <div class="link-title">Discord</div>
+          <div class="link-subtitle">Join my server</div>
+        </div>
+        <div class="link-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// tạo sao nền
+const starsContainer=document.querySelector(".stars");
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=Math.random()*3+2+"s";
+  starsContainer.appendChild(s);
+}
+
+// sao băng ngẫu nhiên
+function shootingStar(){
+  const s=document.createElement("div");
+  s.className="shooting-star";
+  const y=Math.random()*window.innerHeight*0.5;
+  const x=Math.random()*window.innerWidth;
+  const dur=Math.random()*1.5+1.5;
+  s.style.top=y+"px";
+  s.style.left=x+"px";
+  s.style.width=Math.random()*120+80+"px";
+  s.style.animationDuration=dur+"s";
+  document.querySelector(".container").appendChild(s);
+  setTimeout(()=>s.remove(),dur*1000);
+}
+setInterval(shootingStar,1200);
+</script>
 <body>
 <div class="container">
 <div class="stars" id="stars"></div>
